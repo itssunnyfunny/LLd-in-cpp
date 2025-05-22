@@ -80,24 +80,24 @@ class NoTalk : public TalkableRobot {
 
 
 class Robot {
-    private:
-        WalkableRobot* walk;
-        FlyableRobot* fly;
-        TalkableRobot* talk;
+     protected:
+        WalkableRobot* walkable;
+        FlyableRobot* flyable;
+        TalkableRobot* talkable;
     public:
         Robot(WalkableRobot* walk, FlyableRobot* fly, TalkableRobot* talk) {
-            this->walk = walk;
-            this->fly = fly;
-            this->talk = talk;
+            this->walkable = walk;
+            this->flyable = fly;
+            this->talkable = talk;
         }
         void walk() {
-            walk->walk();
+            walkable->walk();
         }
         void fly() {
-            fly->fly();
+            flyable->fly();
         }
         void talk() {
-            talk->talk();
+            talkable->talk();
         }
 
         virtual void projection() = 0; // Abstract method for subclasses
@@ -109,7 +109,7 @@ class CompaniantRobot : public Robot {
     public:
         CompaniantRobot(WalkableRobot* walk, FlyableRobot* fly, TalkableRobot* talk) : Robot(walk, fly, talk) {}
         void projection() override {
-            cout << "Companion Robot" << endl;
+            cout << "Companion Robot displaying itself" << endl;
         }
 };
 
@@ -118,7 +118,7 @@ class SoldierRobot : public Robot {
     public:
         SoldierRobot(WalkableRobot* walk, FlyableRobot* fly, TalkableRobot* talk) : Robot(walk, fly, talk) {}
         void projection() override {
-            cout << "Soldier Robot" << endl;
+            cout << "Soldier Robot displaying itself" << endl;
         }
 };
 
@@ -127,9 +127,36 @@ class workerRobot : public Robot {
     public:
         workerRobot(WalkableRobot* walk, FlyableRobot* fly, TalkableRobot* talk) : Robot(walk, fly, talk) {}
         void projection() override {
-            cout << "Worker Robot" << endl;
+            cout << "Worker Robot displaying itself" << endl;
         }
 };
 
+
+int main(){
+    Robot *robot1 = new SoldierRobot(new NormalWalk(), new NormalFly(), new NormalTalk());
+    robot1->walk();
+    robot1->fly();
+    robot1->talk();
+    robot1->projection();
+    
+    cout << "_________________________" << endl;
+
+    Robot *robot2 = new CompaniantRobot(new Nowalk(), new NoFly(), new NoTalk());
+    robot2->walk();
+    robot2->fly();
+    robot2->talk();
+    robot2->projection();
+
+    cout << "_________________________" << endl;
+
+    Robot *robot3 = new workerRobot(new NormalWalk(), new NormalFly(), new NormalTalk());
+    robot3->walk();
+    robot3->fly();
+    robot3->talk();
+    robot3->projection();
+
+
+    return 0;
+}
 
 
