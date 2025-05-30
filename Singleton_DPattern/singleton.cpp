@@ -26,7 +26,7 @@ class Singleton {
        }
 };
 
-
+// eagor instantiation
 Singleton* Singleton::instance = new Singleton();
 
 int main() {
