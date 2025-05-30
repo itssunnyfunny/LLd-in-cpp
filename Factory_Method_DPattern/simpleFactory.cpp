@@ -16,10 +16,10 @@ class BasicBurger: public Burger {
 };
 
 
-class StrandedBurger: public Burger {
+class StandardBurger: public Burger {
     public:
     void prepare() override {
-        cout << "Preparing Stranded Burger with bun, patty, cheese, lettuce and ketchup" << endl;
+        cout << "Preparing Standard Burger with bun, patty, cheese, lettuce and ketchup" << endl;
     }
 };
 
@@ -37,8 +37,8 @@ class BurgerFactory {
       static Burger* createBurger(string type) {
         if (type == "basic") {
             return new BasicBurger();
-        } else if (type == "stranded") {
-            return new StrandedBurger();
+        } else if (type == "standard") {
+            return new StandardBurger();
         } else if (type == "premium") {
             return new PremiumBurger();
         } else {
